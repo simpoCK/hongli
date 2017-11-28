@@ -1,0 +1,22 @@
+/*底部搜索条件相关CSS调整*/
+.col-sm-2 {width: 10%;float: none;margin-top: 15px;}
+.topSearchDiv{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.topSearchDivChild{
+    height: 34px;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: rgb(85, 85, 85);
+    background-color: rgb(255, 255, 255);
+    background-image: none;
+    box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px inset;
+    padding: 6px 12px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(204, 204, 204);
+    border-image: initial;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}

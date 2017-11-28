@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>管理员列表</title>
+    #parse("sys/header.html")
+    <style>
+        /*.col-sm-2 {width: 10%;float: none;margin-top: 15px;}*/
+        .topSearchDiv{
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .topSearchDivChild{
+            height: 34px;
+            font-size: 14px;
+            line-height: 1.42857;
+            color: rgb(85, 85, 85);
+            background-color: rgb(255, 255, 255);
+            background-image: none;
+            box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px inset;
+            padding: 6px 12px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: rgb(204, 204, 204);
+            border-image: initial;
+            border-radius: 4px;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .myForm{
+            width: 100%;
+        }
+        .myForm fieldset{
+            width: 100%;
+        }
+        .myForm fieldset legend{
+            font-size: 16px;
+        }
+        .myForm label{
+            width: 10%;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+    <!--列表页展示相关START-->
+    <div v-show="showList">
+        <div class="grid-btn">
+            #if($shiro.hasPermission("finance:voucher:update"))
+            <button class="layui-btn" @click="add" type="button"><i class="layui-icon">&#xe61f;</i> 新 增</button>
+            <button class="layui-btn layui-btn-normal" type="button" ><i class="layui-icon">&#xe642;</i>编辑</button>
+            <button class="layui-btn layui-btn-normal" type="button" ><i class="layui-icon">&#xe642;</i>查看</button>
+            #end
+            #if($shiro.hasPermission("finance:voucher:delete"))
+            <button class="layui-btn layui-btn-danger" type="button" ><i class="layui-icon">&#xe640;</i>删除</button>
+            #end
+
+            <div class="topSearchDiv">
+                <input class="topSearchDivChild" placeholder="开始日期">
+                <input class="topSearchDivChild" placeholder="结束日期">
+                <input class="topSearchDivChild" placeholder="凭证字">
+                <input class="topSearchDivChild" placeholder="科目名称">
+                <select class="topSearchDivChild">
+                    <option>默认排序方式</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+            <button class="layui-btn" id="searchSubmit" ><i class="layui-icon">&#xe615;</i>查 询</button>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+    <!--列表页展示相关END-->
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <div class="form-group" style="margin-left: 30%;margin-top: 30px;">
+            #if($shiro.hasPermission("sys:user:update"))
+            <button class="layui-btn" type="button" @click="saveOrUpdate" >保存</button>
+            #end
+            <button class="layui-btn layui-btn-warm" type="button" @click="reload" style="margin-left: 30px">返回</button>
+        </div>
+        <form class="form-horizontal myForm" role="form">
+            <fieldset>
+                <legend>主表</legend>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="ds_host">主机名</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="ds_host" type="text" placeholder="192.168.1.161"/>
+                    </div>
+                    <label class="col-sm-2 control-label" for="ds_name">数据库名</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="ds_name" type="text" placeholder="msh"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="ds_username">用户名</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="ds_username" type="text" placeholder="root"/>
+                    </div>
+                    <label class="col-sm-2 control-label" for="ds_password">密码</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="ds_password" type="password" placeholder="123456"/>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<!-- 选择机构 -->
+<div id="menuLayer" style="display: none;padding:10px;">
+    <ul id="organTree" class="ztree"></ul>
+</div>
+<script src="${rc.contextPath}/statics/js/finance/voucher.js?_${date.systemTime}"></script>
+</body>
+</html>
